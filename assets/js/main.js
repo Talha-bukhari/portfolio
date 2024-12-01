@@ -191,3 +191,29 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
+
+
+
+// EmailJS
+// Initialize EmailJS with your Public Key
+(function() {
+  emailjs.init("HE41bAsaNE_mBssN6"); // Replace with your Public Key
+})();
+
+// Handle Form Submission
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the default form submission
+
+  // Display a loading message or spinner if desired
+  const form = this;
+
+  emailjs.sendForm("service_etc1tw8", "template_kg3xyqp", form)
+      .then(function(response) {
+          alert("Message sent successfully!");
+          form.reset(); // Clear the form after successful submission
+      })
+      .catch(function(error) {
+          alert("Failed to send the message. Please try again.");
+          console.error("EmailJS Error:", error);
+      });
+});
